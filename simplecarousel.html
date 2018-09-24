@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Simple Carousel</title>
+	<style>
+		.slides {
+			overflow: hidden;
+			border-radius: 10px;
+			position: relative;
+			margin: auto;
+			height: 300px;
+			width: 400px;
+		}
+		.slides > div {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+		.slides > div.ativo {
+		    z-index: 1;
+		}
+		.indicadores {
+			width: 100%;
+			padding: 10px;
+			position: absolute;
+			bottom: 0;
+			text-align: center;
+		}
+		#slide1{
+			background-color: red;
+		}
+		#slide2{
+			background-color: green;
+		}
+		#slide3{
+			background-color: blue;
+		}
+		#slide1 .indicadores a:nth-child(3) {
+		    background-color: white;
+		}
+		#slide2 .indicadores a:nth-child(2) {
+		    background-color: white;
+		}
+		#slide3 .indicadores a:nth-child(1) {
+		    background-color: white;
+		}
+		.indicadores a {
+			display: inline-block;
+			background-color: gray;
+			height: 20px;
+			width: 20px;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="slides">
+        <div id="slide1">
+            <div class="indicadores">
+                <a href="#slide1"></a>
+                <a href="#slide2"></a>
+                <a href="#slide3"></a>
+            </div>
+        </div>
+        <div id="slide2">
+            <div class="indicadores">
+                <a href="#slide1"></a>
+                <a href="#slide2"></a>
+                <a href="#slide3"></a>
+            </div>
+        </div>
+        <div id="slide3">
+            <div class="indicadores">
+                <a href="#slide1"></a>
+                <a href="#slide2"></a>
+                <a href="#slide3"></a>
+            </div>
+        </div>
+    </div>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js""></script>
+	<script>
+		$(document).ready(function () {
+			var slideshow = setInterval(function() {
+		        $('.slides > div:last').prependTo('.slides');
+		    }, 5000);
+
+		    $('.indicadores a').on('click',function(){
+		        var clicked = $(this).attr('href');
+		        console.log(clicked);
+		        clearInterval(slideshow);
+		        $('.slides>div').removeClass('ativo');
+		        $(clicked).addClass('ativo');
+		    });
+		});
+	</script>
+</body>
+</html>
